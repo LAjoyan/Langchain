@@ -5,7 +5,7 @@ from util.streaming_utils import STREAM_MODES, handle_stream
 from util.pretty_print import get_user_input
 
 from langgraph.checkpoint.memory import MemorySaver
-from util.tools import calculate, get_current_time
+from util.tools import calculate, get_current_time, read_local_file, scrape_website, search_documents
 
 def run():
     # Get predefined attributes
@@ -13,7 +13,7 @@ def run():
 
     memory = MemorySaver()
 
-    tools = [calculate, get_current_time]
+    tools = [calculate, get_current_time, read_local_file, scrape_website, search_documents ] 
     # Create agent
     agent = create_agent(
         model=model,
@@ -22,6 +22,17 @@ def run():
         "Lita ALLTID på informationen från dina verktyg. " 
         "Om get_current_time ger dig en tid, så ÄR det den aktuella tiden. "
         "Svara alltid på svenska."
+        "Du kan läsa filer på datorn. "
+    "När du använder read_local_file, anta att filerna ligger i "
+    "den aktuella mappen om inget annat anges. "
+    "Gissa INTE sökvägar som '/path/to/', använd bara filnamnet."
+    "Du är en hjälpsam assistent med tillgång till internet. "
+            "Om en användare frågar om innehåll på en specifik URL, använd 'requests_get' "
+            "för att hämta texten från webbsidan."
+            "Du är en proaktiv nyhetsanalytiker. "
+            "Använd 'scrape_website' för att läsa nyheter på nätet. "
+            "Ignorera ALLTID teknisk metadata, JSON och kod. "
+            "Din uppgift är att sammanfatta den viktigaste nyheten i tre korta punkter på svenska."
         ),
         tools=tools,
         checkpointer=memory
