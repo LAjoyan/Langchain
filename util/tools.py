@@ -10,7 +10,7 @@ from langchain_ollama import OllamaEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_core.documents import Document
 
-embeddings = OllamaEmbeddings(model="llama3.1:8b")
+embeddings = OllamaEmbeddings(model="gemma3:4b")
 
 @tool
 def calculate(expression: str) -> str:
