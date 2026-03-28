@@ -14,7 +14,7 @@ This project demonstrates various use cases and functionality in LangChain throu
 2. Create a virtual environment and install dependencies:
 ```bash
 python3.13 -m venv .venv
-source .venv/bin/activate
+source .venv/Scripts/activate
 pip install -r requirements.txt
 ```
 3. Create a `.env` file with your configuration:
